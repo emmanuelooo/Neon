@@ -44,6 +44,8 @@
     <button data-m="boss">👾 Boss Rush<small>3 bosses back to back</small></button>
     <button data-m="time">⏱️ Time Attack<small>3 minutes. Clear as many layouts as you can</small></button>
     <button data-m="surge">⚡ Surge<small>75 seconds. Faster ball, bricks drop quickly</small></button>
+    <button data-m="daily">📅 Daily Challenge<small>Same layout for everyone today. Build a streak</small></button>
+    <button data-m="jumbo">💰 Jumbo Rush<small>90 seconds of jumbo bricks, bombs and big points</small></button>
     <button data-m="zen">🧘 Zen<small>Relaxed: slower ball, extra lives, 6 levels</small></button>
     <button class="bk">← Back</button></div>
   <div id="profile" class="p"><img id="av" alt=""><h2 id="pn">Player</h2><div id="pst" class="grid"></div><div id="pb" class="grid"></div><button class="bk">← Back</button></div>
@@ -51,16 +53,18 @@
     <button data-p="extra_life">❤️ Extra Life · ₦100<small>Continue after game over, or +1 life next run</small></button>
     <button data-p="power_start">⚡ Power Start · ₦150<small>Next run: Fireball + Laser + Wide for 40s</small></button>
     <button data-p="double_score">✨ 2× Score · ₦150<small>Double points for your next run</small></button>
-    <button data-p="neon_pack" class="pri">💎 Neon Pack · ₦500<small>+3 lives, Power Start and 2× Score next run</small></button>
+    <button data-p="jumbo_start">💰 Jumbo Start · ₦150<small>Next run starts with 20s of Jumbo Points (5× score)</small></button>
+    <button data-p="shield_start">🛡️ Shield Pack · ₦100<small>Next run starts with 2 shields</small></button>
+    <button data-p="neon_pack" class="pri">💎 Neon Pack · ₦500<small>+3 lives, Power Start, 2× Score, Jumbo Start and 2 shields</small></button>
     <small>Everything is optional. Items apply to your next run.</small><div id="msg"></div><button class="bk">← Back</button></div>
   <div id="lb" class="p"><h2>🏆 Leaderboard</h2><div id="lbl">Loading…</div><button class="bk">← Back</button></div>
   <div id="settings" class="p"><h2>⚙️ Settings</h2>
     <div class="row">Master volume<input id="mv" type="range" min="0" max="1" step=".05"></div>
     <div class="row">Sound effects<input id="sv" type="range" min="0" max="1" step=".05"></div>
     <div class="row">Music<input id="mu" type="range" min="0" max="1" step=".05"></div>
-    <button id="ctlb"></button><button id="qb"></button><button class="bk">← Back</button></div>
+    <button id="musb"></button><button id="ctlb"></button><button id="qb"></button><button class="bk">← Back</button></div>
   <div id="about" class="p"><h2>ℹ️ About</h2>
-    <div class="row" style="font-weight:400;font-size:13px;line-height:1.55">Break the bricks, catch capsules, beat the bosses.<br><br><b>Move:</b> mouse / touch drag, or A D / arrows.<br><b>Launch:</b> click, tap or Space.<br><b>Pull ball:</b> hold left click / Space / PULL.<br><b>Push ball:</b> hold right click / Shift / PUSH.<br><b>Pause:</b> Esc or the ❚❚ button.<br><br>🔥 Fireball pierces · 🔫 Laser · 🔵 Multi-ball · 🧲 Magnet · ↔️ Wide · ❤️ Life · S Slow-mo · X Shield · B Bomb.<br>🟫 armored · 💥 TNT · 🟨 gold is unbreakable.<br><br>Made with ❤️ in Lagos. Purchases are always optional.</div><button class="bk">← Back</button></div>
+    <div class="row" style="font-weight:400;font-size:13px;line-height:1.55">Break the bricks, catch capsules, beat the bosses.<br><br><b>Move:</b> mouse / touch drag, or A D / arrows.<br><b>Launch:</b> click, tap or Space.<br><b>Pull ball:</b> hold left click / Space / PULL.<br><b>Push ball:</b> hold right click / Shift / PUSH.<br><b>Pause:</b> Esc or the ❚❚ button.<br><br>🔥 Fireball pierces · 🔫 Laser · 🔵 Multi-ball · 🧲 Magnet · ↔️ Wide · ❤️ Life · S Slow-mo · X Shield · B Bomb · J 💰 Jumbo Points (5× score).<br>🟫 armored · 💥 TNT · 🟨 gold is unbreakable.<br><br>Made with ❤️ in Lagos. Purchases are always optional.</div><button class="bk">← Back</button></div>
   <div id="pause" class="p"><h2>PAUSED</h2><button class="pri" id="resume">▶ Resume</button><button id="restart">↻ Restart</button><button data-go="settings">⚙️ Settings</button><button id="quit">⌂ Quit to menu</button></div>
   <div id="over" class="p"><h2 id="ovt"></h2><div id="ovsub"></div><div id="ovst" class="grid"></div>
     <button class="pri" id="cont">❤️ Continue · ₦100</button><button id="again">↻ Play again</button><button data-go="store">🛒 Store</button><button id="tomenu">⌂ Menu</button><div id="omsg"></div></div>
