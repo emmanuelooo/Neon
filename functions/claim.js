@@ -1,11 +1,14 @@
+// Cloudflare Pages Function at /claim. It verifies every purchase with Vatar before the game gives anything.
+// Setting needed in Cloudflare: VATAR_SECRET (stored as a Secret, never in the code)
+// Use vtr_test_... while in the sandbox, vtr_live_... once approved.
 const API = "https://lagoslife.app/api/games/v1"
-const PRODUCTS = new Set(["extra_life", "power_start", "double_score", "neon_pack", "jumbo_start", "shield_start"])
+const PRODUCTS = new Set(["extra_life", "power_start", "double_score", "neon_pack"])
 const SESSION = /^[A-Za-z0-9._\-]{20,2000}$/
 const PID = /^[A-Za-z0-9_\-]{6,64}$/
 const HDR = { "Content-Type": "application/json", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" }
 const reply = (code, obj = {}) => new Response(JSON.stringify(obj), { status: code, headers: HDR })
 
-export const onRequest = async () => reply(405)
+export const onRequest = async () => reply(405)   // anything that is not POST
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -35,8 +38,12 @@ export async function onRequestPost({ request, env }) {
     if (p.http >= 500 || p.http === 429) return reply(502)
     if (p.http !== 200 || p.playerId !== me.playerId || !PRODUCTS.has(p.productId)) return reply(403)
     if (p.status === "refunded") return reply(409, { error: "refunded" })
+    // FIX: only a "paid" purchase may be given. "delivered" means it was already given once,
+    // so replaying the same purchaseId can no longer hand out free items.
     if (p.status === "delivered") return reply(409, { error: "already_delivered" })
     if (p.status !== "paid") return reply(403)
+    // FIX: mark delivered FIRST and only give the item if that worked. If it fails the
+    // purchase stays "paid" and the game retries later (purchases() will list it again).
     const d = await call(`/purchases/${p.id}/deliver`, {})
     if (d.http !== 200) return reply(d.http === 409 ? 409 : 502)
     return reply(200, { productId: p.productId })
